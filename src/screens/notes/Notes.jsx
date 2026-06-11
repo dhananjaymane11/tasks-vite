@@ -1,0 +1,61 @@
+import { useState } from "react";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
+
+import { TopBar, NotesItem, NotesAddEditItem, Modal } from "../../components";
+import { Header, Container, NotesContent } from "./Notes.style";
+
+export default function Notes({ notes, addEditNote, removeNote }) {
+  const [noteToEdit, setNoteToEdit] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = (id) => {
+    const noteToEditLocal = id && notes.find((note) => note._id === id);
+    setNoteToEdit(noteToEditLocal || null);
+    setShowModal(true);
+  };
+
+  const handleAddEditNote = async (data, id) => {
+    await addEditNote(data, id);
+    setShowModal(false);
+  };
+
+  return (
+    <Container>
+      <TopBar />
+      <Header>
+        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+          Notes
+        </Typography>
+        <Button variant="outlined" onClick={handleShowModal}>
+          <AddIcon />
+        </Button>
+      </Header>
+
+      <NotesContent>
+        {notes.map((item) => (
+          <NotesItem
+            key={item._id}
+            item={item}
+            addEditNote={addEditNote}
+            removeNote={removeNote}
+            handleShowModal={handleShowModal}
+          />
+        ))}
+      </NotesContent>
+
+      <Modal
+        showModal={showModal}
+        title={noteToEdit ? "Edit Note" : "Add Note"}
+        setShowModal={setShowModal}
+      >
+        <NotesAddEditItem
+          addEditNote={handleAddEditNote}
+          noteToEdit={noteToEdit}
+          setShowModal={setShowModal}
+        />
+      </Modal>
+    </Container>
+  );
+}
