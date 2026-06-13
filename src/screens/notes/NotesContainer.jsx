@@ -18,12 +18,12 @@ const NotesContainer = () => {
   const [notes, setNotes] = useState([]);
   const apiCall = useApiCall();
 
-  const fetchNotes = async () => {
-    const data = await apiCall(fetchNotesApi());
-    setNotes(data);
-  };
-
   useEffect(() => {
+    const fetchNotes = async () => {
+      const data = await apiCall(fetchNotesApi());
+      setNotes(data);
+    };
+
     fetchNotes();
   }, []);
 

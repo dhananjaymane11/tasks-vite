@@ -15,9 +15,7 @@ const TasksItem = ({ item, toggleTask, removeTask, handleShowModal }) => {
       <TextWrapper>
         <Checkbox checked={item.isDone} onChange={() => toggleTask(item._id)} />
         <TaskEditButton onClick={() => handleShowModal(item._id)}>
-          <TaskText done={item?.isDone?.toString()}>
-            {item.title} - {item.priority}
-          </TaskText>
+          <TaskText done={item?.isDone?.toString()}>{item.title}</TaskText>
         </TaskEditButton>
       </TextWrapper>
       <IconButton onClick={() => removeTask(item._id)}>

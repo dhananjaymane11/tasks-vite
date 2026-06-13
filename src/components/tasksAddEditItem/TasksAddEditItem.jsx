@@ -39,19 +39,6 @@ const TasksAddEditItem = ({ addEditTask, taskToEdit }) => {
         </Button>
       </InputRow>
 
-      {/* <Picker
-        selectedValue={selectedPriority}
-        onValueChange={(itemValue) => setSelectedPriority(itemValue)}
-      >
-        {tasksSelectOptions.map((option) => (
-          <Picker.Item
-            key={option.value}
-            label={option.label}
-            value={option.value}
-          />
-        ))}
-      </Picker> */}
-
       <Select
         variant="standard"
         value={selectedPriority}

@@ -15,7 +15,7 @@ const NotesAddEditItem = ({ addEditNote, noteToEdit }) => {
   const handleAddNote = () => {
     const title = textInput.trim();
     const description = descriptionInput.trim();
-    if (!title || !description) return;
+    if (!title) return;
 
     addEditNote({ title, description }, noteToEdit ? noteToEdit._id : null);
     setTextInput("");
