@@ -1,7 +1,6 @@
 import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 
+import { textColors, taskColors } from "../../constants";
 import {
   ItemContainer,
   TextWrapper,
@@ -9,18 +8,20 @@ import {
   TaskEditButton,
 } from "./TasksItem.style";
 
-const TasksItem = ({ item, toggleTask, removeTask, handleShowModal }) => {
+const TasksItem = ({ taskValue, item, toggleTask, handleShowModal }) => {
   return (
     <ItemContainer>
       <TextWrapper>
-        <Checkbox checked={item.isDone} onChange={() => toggleTask(item._id)} />
+        <Checkbox
+          color={textColors[taskValue]}
+          checked={item.isDone}
+          onChange={() => toggleTask(item._id)}
+          sx={{ color: taskColors[taskValue] }}
+        />
         <TaskEditButton onClick={() => handleShowModal(item._id)}>
           <TaskText done={item?.isDone?.toString()}>{item.title}</TaskText>
         </TaskEditButton>
       </TextWrapper>
-      <IconButton onClick={() => removeTask(item._id)}>
-        <DeleteIcon color="error" />
-      </IconButton>
     </ItemContainer>
   );
 };

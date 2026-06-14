@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 
 import { validateEmail, validateOtp } from "../../utils";
 
-import { Header, Container, InputWrapper } from "./Login.style";
+import { Header, Container, InputWrapper, InputRow } from "./Login.style";
 
 const Login = ({ onSendOtp, onVerifyOtp }) => {
   const [screen, setScreen] = useState("email");
@@ -32,24 +32,42 @@ const Login = ({ onSendOtp, onVerifyOtp }) => {
     }
   };
 
+  const handleEmailInputChange = (e) => {
+    const value = e?.target?.value?.trim();
+    setEmail(value);
+    if (!value) {
+      setErrorText("Enter valid email id");
+    } else {
+      setErrorText("");
+    }
+  };
+
+  const handleOtpInputChange = (e) => {
+    const value = e?.target?.value?.trim();
+    setOtp(value);
+    if (!value) {
+      setErrorText("Enter valid OTP");
+    } else {
+      setErrorText("");
+    }
+  };
+
   const renderLoginView = () => {
     return (
       <InputWrapper>
-        <TextField
-          error
-          fullWidth
-          variant="standard"
-          label="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e?.target?.value)}
-          error={Boolean(errorText)}
-          helperText={errorText}
-        />
-        <Button
-          sx={{ whiteSpace: "nowrap" }}
-          variant="contained"
-          onClick={handleSendOTP}
-        >
+        <InputRow>
+          <TextField
+            error
+            fullWidth
+            variant="standard"
+            label="Enter Email"
+            value={email}
+            onChange={handleEmailInputChange}
+            error={Boolean(errorText)}
+            helperText={errorText}
+          />
+        </InputRow>
+        <Button variant="contained" onClick={handleSendOTP}>
           Send OTP
         </Button>
       </InputWrapper>
@@ -59,21 +77,19 @@ const Login = ({ onSendOtp, onVerifyOtp }) => {
   const renderOtpView = () => {
     return (
       <InputWrapper>
-        <TextField
-          error
-          fullWidth
-          variant="standard"
-          label="Enter OTP"
-          value={otp}
-          onChange={(e) => setOtp(e?.target?.value)}
-          error={Boolean(errorText)}
-          helperText={errorText}
-        />
-        <Button
-          sx={{ whiteSpace: "nowrap" }}
-          variant="contained"
-          onClick={handleVerifyOTP}
-        >
+        <InputRow>
+          <TextField
+            error
+            fullWidth
+            variant="standard"
+            label="Enter OTP"
+            value={otp}
+            onChange={handleOtpInputChange}
+            error={Boolean(errorText)}
+            helperText={errorText}
+          />
+        </InputRow>
+        <Button variant="contained" onClick={handleVerifyOTP}>
           Verify OTP
         </Button>
       </InputWrapper>

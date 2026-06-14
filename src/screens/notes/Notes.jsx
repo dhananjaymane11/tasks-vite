@@ -21,6 +21,11 @@ export default function Notes({ notes, addEditNote, removeNote }) {
     setShowModal(false);
   };
 
+  const handleRemoveNote = async (id) => {
+    await removeNote(id);
+    setShowModal(false);
+  };
+
   return (
     <Container>
       <TopBar />
@@ -39,7 +44,6 @@ export default function Notes({ notes, addEditNote, removeNote }) {
             key={item._id}
             item={item}
             addEditNote={addEditNote}
-            removeNote={removeNote}
             handleShowModal={handleShowModal}
           />
         ))}
@@ -53,6 +57,7 @@ export default function Notes({ notes, addEditNote, removeNote }) {
         <NotesAddEditItem
           addEditNote={handleAddEditNote}
           noteToEdit={noteToEdit}
+          removeNote={handleRemoveNote}
           setShowModal={setShowModal}
         />
       </Modal>

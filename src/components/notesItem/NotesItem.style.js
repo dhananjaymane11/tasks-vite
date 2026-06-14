@@ -8,10 +8,6 @@ export const NotesBox = styled.div`
   display: flex;
 `;
 
-export const TextWrapper = styled.div`
-  flex-grow: 1;
-`;
-
 export const NoteEditButton = styled.a``;
 
 export const NoteText = styled.p`

@@ -26,6 +26,11 @@ const Tasks = ({ tasks, addEditTask, toggleTask, removeTask }) => {
     setShowModal(false);
   };
 
+  const handleRemoveTask = async (id) => {
+    await removeTask(id);
+    setShowModal(false);
+  };
+
   return (
     <Container>
       <TopBar />
@@ -41,7 +46,6 @@ const Tasks = ({ tasks, addEditTask, toggleTask, removeTask }) => {
       <TasksContent
         tasks={tasks}
         toggleTask={toggleTask}
-        removeTask={removeTask}
         handleShowModal={handleShowModal}
       />
 
@@ -53,6 +57,7 @@ const Tasks = ({ tasks, addEditTask, toggleTask, removeTask }) => {
         <TasksAddEditItem
           addEditTask={handleAddEditTask}
           taskToEdit={taskToEdit}
+          removeTask={handleRemoveTask}
           setShowModal={setShowModal}
         />
       </Modal>

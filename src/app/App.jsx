@@ -24,6 +24,15 @@ const darkTheme = createTheme({
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          padding: "5px 10px",
+          minWidth: 0,
+          textTransform: "none",
+        },
+      },
+    },
   },
 });
 

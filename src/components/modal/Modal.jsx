@@ -11,7 +11,7 @@ const Modal = ({ showModal, setShowModal, title, children }) => {
       onClose={() => setShowModal(false)}
     >
       <ModalContent>
-        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+        <Typography variant="h5" sx={{ fontWeight: "bold", mb: "10px" }}>
           {title}
         </Typography>
         <ChildrenWrapper>{children}</ChildrenWrapper>

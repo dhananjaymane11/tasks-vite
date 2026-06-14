@@ -12,8 +12,8 @@ export const Header = styled.div`
   margin-bottom: 20px;
 `;
 
-export const InputWrapper = styled.div`
-  display: flex;
-  gap: 15px;
-  align-items: center;
+export const InputRow = styled.div`
+  margin-bottom: 15px;
 `;
+
+export const InputWrapper = styled.div``;

@@ -1,15 +1,19 @@
 import Typography from "@mui/material/Typography";
-import TasksItem from "../tasksItem/TasksItem";
-import { tasksSelectOptions } from "../../constants";
 
+import TasksItem from "../tasksItem/TasksItem";
+import { tasksSelectOptions, textColors } from "../../constants";
 import { BoxWrapper, TasksBox } from "./TasksContent.style";
 
-const tasksContent = ({ tasks, toggleTask, removeTask, handleShowModal }) => {
+const tasksContent = ({ tasks, toggleTask, handleShowModal }) => {
   return (
     <BoxWrapper>
       {tasksSelectOptions.map((option) => (
         <TasksBox key={option.value}>
-          <Typography variant="subtitle1" gutterBottom>
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            color={textColors[option.value]}
+          >
             {option.label}
           </Typography>
 
@@ -18,9 +22,9 @@ const tasksContent = ({ tasks, toggleTask, removeTask, handleShowModal }) => {
             .map((item) => (
               <TasksItem
                 key={item._id}
+                taskValue={option.value}
                 item={item}
                 toggleTask={toggleTask}
-                removeTask={removeTask}
                 handleShowModal={handleShowModal}
               />
             ))}
