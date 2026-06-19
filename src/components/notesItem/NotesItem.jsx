@@ -2,16 +2,22 @@ import {
   NotesBox,
   NoteText,
   NoteDescription,
-  NoteEditButton,
+  NoteEditLink,
 } from "./NotesItem.style";
 
 const NotesItem = ({ item, handleShowModal }) => {
   return (
     <NotesBox>
-      <NoteEditButton onClick={() => handleShowModal(item._id)}>
-        <NoteText>{item.title}</NoteText>
-        <NoteDescription>{item.description}</NoteDescription>
-      </NoteEditButton>
+      <NoteText>
+        <NoteEditLink onClick={() => handleShowModal(item._id)}>
+          {item.title}
+        </NoteEditLink>
+      </NoteText>
+      <NoteDescription>
+        <NoteEditLink onClick={() => handleShowModal(item._id)}>
+          {item.description}
+        </NoteEditLink>
+      </NoteDescription>
     </NotesBox>
   );
 };

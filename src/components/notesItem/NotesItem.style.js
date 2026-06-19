@@ -6,16 +6,19 @@ export const NotesBox = styled.div`
   border-radius: 8px;
   margin-bottom: 10px;
   display: flex;
+  flex-direction: column;
 `;
 
-export const NoteEditButton = styled.a``;
+export const NoteEditLink = styled.a`
+  display: block;
+`;
 
-export const NoteText = styled.p`
+export const NoteText = styled.div`
   color: #fff;
   font-size: 14px;
 `;
 
-export const NoteDescription = styled.p`
+export const NoteDescription = styled.div`
   color: #fff;
   font-size: 12px;
 `;

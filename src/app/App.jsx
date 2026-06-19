@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 import { AuthProvider } from "./AuthProvider";
+import { ErrorProvider } from "./ErrorProvider";
 import router from "./router";
 
 const darkTheme = createTheme({
@@ -38,12 +39,14 @@ const darkTheme = createTheme({
 
 function App() {
   return (
-    <AuthProvider>
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </AuthProvider>
+    <ThemeProvider theme={darkTheme}>
+      <AuthProvider>
+        <ErrorProvider>
+          <CssBaseline />
+          <RouterProvider router={router} />
+        </ErrorProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 
