@@ -7,8 +7,7 @@ import { validateEmail, validateOtp } from "../../utils";
 
 import { Header, Container, InputWrapper, InputRow } from "./Login.style";
 
-const Login = ({ onSendOtp, onVerifyOtp }) => {
-  const [screen, setScreen] = useState("email");
+const Login = ({ screen, onSendOtp, onVerifyOtp }) => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [errorText, setErrorText] = useState("");
@@ -17,7 +16,6 @@ const Login = ({ onSendOtp, onVerifyOtp }) => {
     if (validateEmail(email)) {
       setErrorText("");
       await onSendOtp({ email });
-      setScreen("otp");
     } else {
       setErrorText("Enter valid email id");
     }

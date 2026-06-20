@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router";
 
 import { useApiCall } from "../../hooks";
@@ -6,12 +7,16 @@ import { useAuth } from "../../app/AuthProvider.jsx";
 import Login from "./Login.jsx";
 
 const LoginContainer = () => {
+  const [screen, setScreen] = useState("email");
   const { storeTokenFromContext } = useAuth();
   const apiCall = useApiCall(false);
   const navigate = useNavigate();
 
   const onSendOtp = async (data) => {
-    await apiCall(sendOtpApi(data));
+    const { success } = await apiCall(sendOtpApi(data));
+    if (success) {
+      setScreen("otp");
+    }
   };
 
   const onVerifyOtp = async (data) => {
@@ -22,7 +27,9 @@ const LoginContainer = () => {
     }
   };
 
-  return <Login onSendOtp={onSendOtp} onVerifyOtp={onVerifyOtp} />;
+  return (
+    <Login screen={screen} onSendOtp={onSendOtp} onVerifyOtp={onVerifyOtp} />
+  );
 };
 
 export default LoginContainer;

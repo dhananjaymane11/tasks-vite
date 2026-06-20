@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useApiCall } from "../../hooks";
 import {
@@ -20,8 +20,10 @@ const NotesContainer = () => {
 
   useEffect(() => {
     const fetchNotes = async () => {
-      const data = await apiCall(fetchNotesApi());
-      setNotes(data);
+      const result = await apiCall(fetchNotesApi());
+      if (result) {
+        setNotes(result);
+      }
     };
 
     fetchNotes();
@@ -29,8 +31,10 @@ const NotesContainer = () => {
 
   const addEditNote = async (data, id) => {
     if (id) {
-      await apiCall(updateNoteApi(id, data));
-      setNotes(updateDataInArray(notes, id, data));
+      const result = await apiCall(updateNoteApi(id, data));
+      if (result) {
+        setNotes(updateDataInArray(notes, id, data));
+      }
     } else {
       const { insertedId } = await apiCall(addNoteApi(data));
       setNotes(addDataToArray(notes, { ...data, _id: insertedId }));
@@ -38,8 +42,10 @@ const NotesContainer = () => {
   };
 
   const removeNote = async (id) => {
-    await apiCall(deleteNoteApi(id));
-    setNotes(removeDataFromArray(notes, id));
+    const result = await apiCall(deleteNoteApi(id));
+    if (result) {
+      setNotes(removeDataFromArray(notes, id));
+    }
   };
 
   return (
