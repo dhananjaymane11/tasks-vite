@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 
+import { useToast } from "../../contexts/toast";
 import { useNotesState } from "../../state";
 import { useApiCall } from "../../hooks";
 import {
@@ -17,12 +18,14 @@ import Notes from "./Notes";
 
 const NotesContainer = () => {
   const { notesState, setNotesState } = useNotesState();
+  const { setToastMessage } = useToast();
   const apiCall = useApiCall();
 
   useEffect(() => {
     const fetchNotes = async () => {
       const result = await apiCall(fetchNotesApi());
       if (result) {
+        setToastMessage("Successfully fetched notes");
         setNotesState(result);
       }
     };
@@ -36,9 +39,11 @@ const NotesContainer = () => {
     if (id) {
       const result = await apiCall(updateNoteApi(id, data));
       if (result) {
+        setToastMessage("Successfully updated the note");
         setNotesState(updateDataInArray(notesState, id, data));
       }
     } else {
+      setToastMessage("Successfully create a new note");
       const { insertedId } = await apiCall(addNoteApi(data));
       setNotesState(addDataToArray(notesState, { ...data, _id: insertedId }));
     }
@@ -47,6 +52,7 @@ const NotesContainer = () => {
   const removeNote = async (id) => {
     const result = await apiCall(deleteNoteApi(id));
     if (result) {
+      setToastMessage("Successfully deleted the note");
       setNotesState(removeDataFromArray(notesState, id));
     }
   };

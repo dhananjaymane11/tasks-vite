@@ -4,6 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 import { AuthProvider } from "../contexts/auth";
 import { ErrorProvider } from "../contexts/error";
+import { ToastProvider } from "../contexts/toast";
 import router from "./router";
 
 const darkTheme = createTheme({
@@ -42,8 +43,10 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <AuthProvider>
         <ErrorProvider>
-          <CssBaseline />
-          <RouterProvider router={router} />
+          <ToastProvider>
+            <CssBaseline />
+            <RouterProvider router={router} />
+          </ToastProvider>
         </ErrorProvider>
       </AuthProvider>
     </ThemeProvider>
