@@ -23,7 +23,7 @@ const TasksAddEditItem = ({
   const [errorText, setErrorText] = useState("");
 
   const handleInputChange = (e) => {
-    const value = e?.target?.value?.trim();
+    const value = e?.target?.value;
     setInput(value);
     if (!value) {
       setErrorText("Enter valid task");

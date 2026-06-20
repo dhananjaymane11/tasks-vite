@@ -35,7 +35,7 @@ const NotesAddEditItem = ({
   };
 
   const handleTitleInputChange = (e) => {
-    const value = e?.target?.value?.trim();
+    const value = e?.target?.value;
     setTextInput(value);
     if (!value) {
       setErrorText("Enter valid title");
@@ -44,7 +44,7 @@ const NotesAddEditItem = ({
     }
   };
   const handleDescriptionInputChange = (e) => {
-    const value = e?.target?.value?.trim();
+    const value = e?.target?.value;
     setDescriptionInput(value);
   };
 
