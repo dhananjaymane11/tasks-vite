@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
+import { useTasksState } from "../../state";
 import { useApiCall } from "../../hooks";
 import {
   fetchTasksApi,
@@ -15,52 +16,54 @@ import {
 import Tasks from "./Tasks";
 
 const TasksContainer = () => {
-  const [tasks, setTasks] = useState([]);
+  const { tasksState, setTasksState } = useTasksState();
   const apiCall = useApiCall();
 
   useEffect(() => {
     const fetchTasks = async () => {
       const result = await apiCall(fetchTasksApi());
       if (result) {
-        setTasks(result);
+        setTasksState(result);
       }
     };
 
-    fetchTasks();
+    if (tasksState?.length === 0) {
+      fetchTasks();
+    }
   }, []);
 
   const addEditTask = async (data, id) => {
     if (id) {
       const result = await apiCall(updateTaskApi(id, data));
       if (result) {
-        setTasks(updateDataInArray(tasks, id, data));
+        setTasksState(updateDataInArray(tasksState, id, data));
       }
     } else {
       const { insertedId } = await apiCall(addTaskApi(data));
-      setTasks(
-        addDataToArray(tasks, { ...data, isDone: false, _id: insertedId }),
+      setTasksState(
+        addDataToArray(tasksState, { ...data, isDone: false, _id: insertedId }),
       );
     }
   };
 
   const toggleTask = async (id) => {
-    const newStatus = !tasks.find((task) => task._id === id).isDone;
+    const newStatus = !tasksState.find((task) => task._id === id).isDone;
     const result = await apiCall(updateTaskApi(id, { isDone: newStatus }));
     if (result) {
-      setTasks(updateDataInArray(tasks, id, { isDone: newStatus }));
+      setTasksState(updateDataInArray(tasksState, id, { isDone: newStatus }));
     }
   };
 
   const removeTask = async (id) => {
     const result = await apiCall(deleteTaskApi(id));
     if (result) {
-      setTasks(removeDataFromArray(tasks, id));
+      setTasksState(removeDataFromArray(tasksState, id));
     }
   };
 
   return (
     <Tasks
-      tasks={tasks}
+      tasks={tasksState}
       addEditTask={addEditTask}
       toggleTask={toggleTask}
       removeTask={removeTask}

@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
+import { useNotesState } from "../../state";
 import { useApiCall } from "../../hooks";
 import {
   fetchNotesApi,
@@ -15,41 +16,47 @@ import {
 import Notes from "./Notes";
 
 const NotesContainer = () => {
-  const [notes, setNotes] = useState([]);
+  const { notesState, setNotesState } = useNotesState();
   const apiCall = useApiCall();
 
   useEffect(() => {
     const fetchNotes = async () => {
       const result = await apiCall(fetchNotesApi());
       if (result) {
-        setNotes(result);
+        setNotesState(result);
       }
     };
 
-    fetchNotes();
+    if (notesState?.length === 0) {
+      fetchNotes();
+    }
   }, []);
 
   const addEditNote = async (data, id) => {
     if (id) {
       const result = await apiCall(updateNoteApi(id, data));
       if (result) {
-        setNotes(updateDataInArray(notes, id, data));
+        setNotesState(updateDataInArray(notesState, id, data));
       }
     } else {
       const { insertedId } = await apiCall(addNoteApi(data));
-      setNotes(addDataToArray(notes, { ...data, _id: insertedId }));
+      setNotesState(addDataToArray(notesState, { ...data, _id: insertedId }));
     }
   };
 
   const removeNote = async (id) => {
     const result = await apiCall(deleteNoteApi(id));
     if (result) {
-      setNotes(removeDataFromArray(notes, id));
+      setNotesState(removeDataFromArray(notesState, id));
     }
   };
 
   return (
-    <Notes notes={notes} addEditNote={addEditNote} removeNote={removeNote} />
+    <Notes
+      notes={notesState}
+      addEditNote={addEditNote}
+      removeNote={removeNote}
+    />
   );
 };
 
