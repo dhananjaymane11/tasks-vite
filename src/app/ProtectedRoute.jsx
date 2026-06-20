@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router";
 
-import { useAuth } from "./AuthProvider";
+import { useAuth } from "../contexts/auth";
 
 export default function ProtectedRoute() {
   const { isLoggedIn } = useAuth();

@@ -2,8 +2,8 @@ import { RouterProvider } from "react-router";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import { AuthProvider } from "./AuthProvider";
-import { ErrorProvider } from "./ErrorProvider";
+import { AuthProvider } from "../contexts/auth";
+import { ErrorProvider } from "../contexts/error";
 import router from "./router";
 
 const darkTheme = createTheme({

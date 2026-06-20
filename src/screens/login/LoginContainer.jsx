@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 import { useApiCall } from "../../hooks";
 import { sendOtpApi, verifyOtpApi } from "../../api/login";
-import { useAuth } from "../../app/AuthProvider.jsx";
+import { useAuth } from "../../contexts/auth";
 import Login from "./Login.jsx";
 
 const LoginContainer = () => {
@@ -13,15 +13,15 @@ const LoginContainer = () => {
   const navigate = useNavigate();
 
   const onSendOtp = async (data) => {
-    const { success } = await apiCall(sendOtpApi(data));
-    if (success) {
+    const result = await apiCall(sendOtpApi(data));
+    if (result?.success) {
       setScreen("otp");
     }
   };
 
   const onVerifyOtp = async (data) => {
     const result = await apiCall(verifyOtpApi(data));
-    if (result?.success === true) {
+    if (result?.success) {
       await storeTokenFromContext(result.token);
       navigate("/");
     }

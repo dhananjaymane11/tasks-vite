@@ -1,4 +1,4 @@
-import { useAuth } from "../../app/AuthProvider.jsx";
+import { useAuth } from "../../contexts/auth";
 import Profile from "./Profile.jsx";
 
 const ProfileContainer = () => {

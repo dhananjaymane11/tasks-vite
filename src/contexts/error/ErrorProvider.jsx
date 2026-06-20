@@ -1,11 +1,10 @@
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-import { useAuth } from "./AuthProvider";
-import { Modal } from "../components";
-
-const ErrorContext = createContext(undefined);
+import { useAuth } from "../auth";
+import { Modal } from "../../components";
+import { ErrorContext } from "./ErrorContext";
 
 export function ErrorProvider({ children }) {
   const [showModal, setShowModal] = useState(false);
@@ -14,7 +13,7 @@ export function ErrorProvider({ children }) {
   const showErrorPopup = (val) => setShowModal(val);
 
   return (
-    <ErrorContext.Provider value={{ showErrorPopup }}>
+    <ErrorContext value={{ showErrorPopup }}>
       {children}
 
       <Modal showModal={showModal} title={"Error"}>
@@ -34,14 +33,6 @@ export function ErrorProvider({ children }) {
           Exit
         </Button>
       </Modal>
-    </ErrorContext.Provider>
+    </ErrorContext>
   );
 }
-
-export const useErrorPopup = () => {
-  const context = useContext(ErrorContext);
-  if (!context) {
-    throw new Error("useErrorPopup must be used within an ErrorProvider");
-  }
-  return context;
-};

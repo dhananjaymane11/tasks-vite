@@ -1,9 +1,9 @@
 import { getStoredToken } from "../api/store";
 import API_URL from "../api/baseUrl";
-import { useErrorPopup } from "../app/ErrorProvider";
+import { useError } from "../contexts/error";
 
 const useApiCall = (isSecure = true) => {
-  const { showErrorPopup } = useErrorPopup();
+  const { showErrorPopup } = useError();
 
   const apiCall = async ({ endpoint, method = "GET", data = null }) => {
     try {
