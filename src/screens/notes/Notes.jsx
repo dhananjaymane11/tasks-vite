@@ -2,6 +2,7 @@ import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
+import Masonry from "@mui/lab/Masonry";
 
 import { TopBar, NotesItem, NotesAddEditItem, Modal } from "../../components";
 import { Header, Container, NotesContent } from "./Notes.style";
@@ -39,14 +40,16 @@ export default function Notes({ notes, addEditNote, removeNote }) {
       </Header>
 
       <NotesContent>
-        {notes.map((item) => (
-          <NotesItem
-            key={item._id}
-            item={item}
-            addEditNote={addEditNote}
-            handleShowModal={handleShowModal}
-          />
-        ))}
+        <Masonry columns={2} spacing={1}>
+          {notes.map((item) => (
+            <NotesItem
+              key={item._id}
+              item={item}
+              addEditNote={addEditNote}
+              handleShowModal={handleShowModal}
+            />
+          ))}
+        </Masonry>
       </NotesContent>
 
       <Modal
