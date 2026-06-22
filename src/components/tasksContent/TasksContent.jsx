@@ -13,6 +13,8 @@ const tasksContent = ({ tasks, toggleTask, handleShowModal }) => {
             variant="subtitle1"
             gutterBottom
             color={textColors[option.value]}
+            noWrap
+            sx={{ fontSize: "15px" }}
           >
             {option.label}
           </Typography>

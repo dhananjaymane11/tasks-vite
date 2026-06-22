@@ -11,14 +11,9 @@ export const NotesBox = styled.div`
 
 export const NoteEditLink = styled.a`
   display: block;
+  color: #fff;
 `;
 
-export const NoteText = styled.div`
-  color: #fff;
-  font-size: 14px;
-`;
+export const NoteText = styled.div``;
 
-export const NoteDescription = styled.div`
-  color: #fff;
-  font-size: 12px;
-`;
+export const NoteDescription = styled.div``;

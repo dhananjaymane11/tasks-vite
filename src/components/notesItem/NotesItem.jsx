@@ -1,3 +1,5 @@
+import Typography from "@mui/material/Typography";
+
 import {
   NotesBox,
   NoteText,
@@ -10,12 +12,14 @@ const NotesItem = ({ item, handleShowModal }) => {
     <NotesBox>
       <NoteText>
         <NoteEditLink onClick={() => handleShowModal(item._id)}>
-          {item.title}
+          <Typography variant="body1" sx={{ fontSize: "15px" }}>
+            {item.title}
+          </Typography>
         </NoteEditLink>
       </NoteText>
       <NoteDescription>
         <NoteEditLink onClick={() => handleShowModal(item._id)}>
-          {item.description}
+          <Typography variant="body2">{item.description}</Typography>
         </NoteEditLink>
       </NoteDescription>
     </NotesBox>
