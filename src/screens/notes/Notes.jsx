@@ -31,7 +31,7 @@ export default function Notes({ notes, addEditNote, removeNote }) {
     <Container>
       <TopBar />
       <Header>
-        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
           Notes
         </Typography>
         <Button variant="outlined" onClick={handleShowModal}>

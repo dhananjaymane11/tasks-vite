@@ -35,7 +35,7 @@ const Tasks = ({ tasks, addEditTask, toggleTask, removeTask }) => {
     <Container>
       <TopBar />
       <Header>
-        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
           Tasks
         </Typography>
         <Button variant="outlined" onClick={handleShowModal}>

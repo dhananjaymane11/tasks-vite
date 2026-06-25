@@ -25,16 +25,17 @@ const TasksContent = ({ tasks, toggleTask, handleShowModal }) => {
         return (
           <TasksBox key={option.value}>
             <Typography
-              variant="subtitle1"
+              variant="h6"
               gutterBottom
               color={textColors[option.value]}
               noWrap
+              sx={{ fontSize: "15px" }}
             >
               {option.label}
             </Typography>
 
             {optionTasks.length === 0 && (
-              <Typography variant="body2">No tasks</Typography>
+              <Typography variant="body1">No tasks</Typography>
             )}
 
             {optionTasks.map((item) => (

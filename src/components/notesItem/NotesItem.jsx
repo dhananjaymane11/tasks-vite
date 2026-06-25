@@ -12,14 +12,16 @@ const NotesItem = ({ item, handleShowModal }) => {
     <NotesBox>
       <NoteText>
         <NoteEditLink onClick={() => handleShowModal(item._id)}>
-          <Typography variant="body1" sx={{ fontSize: "15px" }}>
+          <Typography variant="h6" sx={{ fontSize: "15px" }}>
             {item.title}
           </Typography>
         </NoteEditLink>
       </NoteText>
       <NoteDescription>
         <NoteEditLink onClick={() => handleShowModal(item._id)}>
-          <Typography variant="body2">{item.description}</Typography>
+          <Typography variant="body1" sx={{ fontSize: "13px" }}>
+            {item.description}
+          </Typography>
         </NoteEditLink>
       </NoteDescription>
     </NotesBox>

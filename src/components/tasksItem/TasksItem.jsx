@@ -15,7 +15,7 @@ const TasksItem = ({ taskValue, item, toggleTask, handleShowModal }) => {
       />
       <TaskEditButton onClick={() => handleShowModal(item._id)}>
         <Typography
-          variant="body2"
+          variant="body1"
           noWrap
           sx={[
             item?.isDone && {

@@ -9,7 +9,7 @@ export default function Profile({ onLogout }) {
     <Container>
       <TopBar />
       <Header>
-        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+        <Typography variant="h5" sx={{ fontWeight: "bold" }}>
           Profile
         </Typography>
         <Button variant="contained" onClick={onLogout}>
