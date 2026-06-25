@@ -1,27 +1,43 @@
+import { useMemo } from "react";
 import Typography from "@mui/material/Typography";
 
 import TasksItem from "../tasksItem/TasksItem";
 import { tasksSelectOptions, textColors } from "../../constants";
 import { BoxWrapper, TasksBox } from "./TasksContent.style";
 
-const tasksContent = ({ tasks, toggleTask, handleShowModal }) => {
+const TasksContent = ({ tasks, toggleTask, handleShowModal }) => {
+  const groupedTasksMap = useMemo(() => {
+    const map = {};
+    for (const item of tasks) {
+      if (!map[item.priority]) {
+        map[item.priority] = [];
+      }
+      map[item.priority].push(item);
+    }
+    return map;
+  }, [tasks]);
+
   return (
     <BoxWrapper>
-      {tasksSelectOptions.map((option) => (
-        <TasksBox key={option.value}>
-          <Typography
-            variant="subtitle1"
-            gutterBottom
-            color={textColors[option.value]}
-            noWrap
-            sx={{ fontSize: "15px" }}
-          >
-            {option.label}
-          </Typography>
+      {tasksSelectOptions.map((option) => {
+        const optionTasks = groupedTasksMap[option.value] || [];
 
-          {tasks
-            .filter((task) => (task.priority === option.value ? task : null))
-            .map((item) => (
+        return (
+          <TasksBox key={option.value}>
+            <Typography
+              variant="subtitle1"
+              gutterBottom
+              color={textColors[option.value]}
+              noWrap
+            >
+              {option.label}
+            </Typography>
+
+            {optionTasks.length === 0 && (
+              <Typography variant="body2">No tasks</Typography>
+            )}
+
+            {optionTasks.map((item) => (
               <TasksItem
                 key={item._id}
                 taskValue={option.value}
@@ -30,10 +46,11 @@ const tasksContent = ({ tasks, toggleTask, handleShowModal }) => {
                 handleShowModal={handleShowModal}
               />
             ))}
-        </TasksBox>
-      ))}
+          </TasksBox>
+        );
+      })}
     </BoxWrapper>
   );
 };
 
-export default tasksContent;
+export default TasksContent;
